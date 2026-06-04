@@ -1,0 +1,11 @@
+
+USE master; 
+GO
+DROP DATABASE IF EXISTS HospitalDB; 
+GO
+
+CREATE DATABASE HospitalDB; 
+GO
+USE HospitalDB; 
+GO
+

@@ -42,8 +42,8 @@ deleted_at datetime
 Create table Usuario.TEmpleado(
 nEmpleadoID int identity(1,1) Constraint pk_EmpID primary key,
 cNIF char(14) constraint uq_NIF unique,
-cNombre Nvarchar(100) Not null,
-cApellido Nvarchar(100) Not null,
+cNombre Nvarchar(50) Not null,
+cApellido Nvarchar(50) Not null,
 nDepartamentoID int null constraint fk_nDEPID foreign key (nDepartamentoID) references Administracion.TDepartamento(nDepartamentoID),
 nCargoID int null constraint fk_nCARID foreign key (nCargoID) references Usuario.TCargo(nCargoID),
 dFechaContratacion datetime not null constraint df_dFecCont default getdate(),
@@ -67,3 +67,25 @@ CREATE TABLE TEmpleadoProyecto (
     Constraint fk_empleID FOREIGN KEY (nEmpleadoID) REFERENCES Usuario.TEmpleado(nEmpleadoID) ON DELETE CASCADE,
     Constraint fk_proyID FOREIGN KEY (nProyectoID) REFERENCES Administracion.TProyecto(TProyectoID) ON DELETE CASCADE
 );
+
+Alter table Usuario.TEmpleado
+Add cEmail Nvarchar(100) not null constraint uq_cEmail unique;
+
+Alter table Usuario.TEmpleado
+Add cTelefono varchar(20) not null ;
+
+Alter table Usuario.TEmpleado
+alter column cNombre Nvarchar(100) not null;
+
+Alter table Usuario.TEmpleado
+alter column cApellido Nvarchar(100) not null;
+
+Alter table Usuario.TEmpleado
+Add cDireccion navarchar(200);
+
+Alter table Usuario.TEmpleado
+Add Edad int not null constraint ck_Edad CHeck(Edad between 18 and 65);
+
+
+
+

@@ -342,3 +342,26 @@ INSERT INTO TEmpleadoProyecto
 VALUES
 (11,2);
 
+DELETE FROM Usuario.TEmpleado
+WHERE cNIF = '001-010190-0001A';
+
+DELETE FROM Usuario.TEmpleado
+WHERE bActivo = 0;
+
+DELETE FROM Administracion.TProyecto
+WHERE TProyectoID = 3;
+
+DELETE FROM TEmpleadoProyecto
+WHERE nEmpleadoID = 5;
+
+DELETE FROM Administracion.TDepartamento
+WHERE nDepartamentoID = 5
+AND NOT EXISTS
+(
+    SELECT 1
+    FROM Usuario.TEmpleado
+    WHERE nDepartamentoID = 5
+);
+
+
+

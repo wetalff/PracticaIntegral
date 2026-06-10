@@ -363,5 +363,97 @@ AND NOT EXISTS
     WHERE nDepartamentoID = 5
 );
 
+SELECT *
+FROM Usuario.TEmpleado
+ORDER BY cApellido;
+
+SELECT *
+FROM Usuario.TEmpleado
+WHERE nSalario > 1000;
+
+SELECT *
+FROM Usuario.TEmpleado
+WHERE bActivo = 1;
+
+SELECT *
+FROM Usuario.TEmpleado
+WHERE YEAR(dFechaContratacion) = YEAR(GETDATE());
+
+SELECT E.cNombre,
+       E.cApellido,
+       D.cNombreDepartamento
+FROM Usuario.TEmpleado E
+INNER JOIN Administracion.TDepartamento D
+ON E.nDepartamentoID = D.nDepartamentoID;
+
+SELECT E.cNombre,
+       E.cApellido,
+       C.cNombreCargo
+FROM Usuario.TEmpleado E
+INNER JOIN Usuario.TCargo C
+ON E.nCargoID = C.nCargoID;
+
+SELECT E.cNombre,
+       E.cApellido,
+       P.cNombre AS Proyecto
+FROM Usuario.TEmpleado E
+INNER JOIN TEmpleadoProyecto EP
+ON E.nEmpleadoID = EP.nEmpleadoID
+INNER JOIN Administracion.TProyecto P
+ON EP.nProyectoID = P.TProyectoID;
+
+SELECT D.cNombreDepartamento,
+       COUNT(E.nEmpleadoID) AS CantidadEmpleados
+FROM Administracion.TDepartamento D
+LEFT JOIN Usuario.TEmpleado E
+ON D.nDepartamentoID = E.nDepartamentoID
+GROUP BY D.cNombreDepartamento;
+
+SELECT D.cNombreDepartamento,
+       AVG(E.nSalario) AS SalarioPromedio
+FROM Administracion.TDepartamento D
+INNER JOIN Usuario.TEmpleado E
+ON D.nDepartamentoID = E.nDepartamentoID
+GROUP BY D.cNombreDepartamento;
+
+SELECT D.cNombreDepartamento,
+       MAX(E.nSalario) AS SalarioMaximo,
+       MIN(E.nSalario) AS SalarioMinimo
+FROM Administracion.TDepartamento D
+INNER JOIN Usuario.TEmpleado E
+ON D.nDepartamentoID = E.nDepartamentoID
+GROUP BY D.cNombreDepartamento;
+
+SELECT P.cNombre,
+       COUNT(EP.nEmpleadoID) AS CantidadEmpleados
+FROM Administracion.TProyecto P
+INNER JOIN TEmpleadoProyecto EP
+ON P.TProyectoID = EP.nProyectoID
+GROUP BY P.cNombre
+HAVING COUNT(EP.nEmpleadoID) > 2;
+
+SELECT *
+FROM Usuario.TEmpleado
+WHERE cApellido LIKE 'G%';
+
+SELECT *
+FROM Usuario.TEmpleado
+ORDER BY nSalario DESC;
+
+SELECT TOP 3 *
+FROM Usuario.TEmpleado
+ORDER BY nSalario DESC;
+
+SELECT *
+FROM Usuario.TEmpleado
+WHERE Edad BETWEEN 25 AND 40;
+
+SELECT COUNT(*) AS TotalEmpleadosActivos
+FROM Usuario.TEmpleado
+WHERE bActivo = 1;
+
+SELECT COUNT(*) AS TotalProyectos
+FROM Administracion.TProyecto;
+
 
 
